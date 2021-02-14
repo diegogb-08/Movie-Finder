@@ -1,0 +1,16 @@
+#pelis {
+    
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-gap: 1em;
+    width: 70rem;
+}
+
+.titlePicture {
+    text-align: center;
+}
+
+.titlePicture img{
+    width: 100%;
+}
