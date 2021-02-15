@@ -8,38 +8,200 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background-color: rgb(43,44,50);
 }
 
-#pelis {
+
+/* Navbar */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(248, 249, 250, 0.178);
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 5px 5px 26px -16px rgba(0,0,0,0.75);
+}
+
+.brand-title {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    height: 3rem;
+}
+
+#logo {
+    height: 100%;
+}
+
+#searchBar {
+    border-radius: 1rem;
+    width: 15rem;
+    height: 2rem;
+    padding-left: 1rem;
+    margin-top: 0.5rem;
+    margin-right: 2rem;
+}
+
+.navbar-links ul {
+    margin: 0.5rem 0 0.5rem 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar-links li {
+    list-style: none;
+    border-radius: 0.5rem;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    color: red;
+    padding: 1rem;
+    display: block;
+    font-weight: bold;
+}
+
+.navbar-links li a:hover {
+    color: white;
+}
+
+.toggle-button {
+    position: absolute;
+    top: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* Navbar Media Queary */
+
+
+@media (max-width: 800px) {
+    .brand-title {
+        color: white;
+    }
+
+    .toggle-button {
+        display: flex;
+    }
+
+    .navbar-links {
+      display: none;
+      width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: black;
+    }
+
+    .navbar-links ul {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navbar-links li {
+        text-align: center;
+    }
+
+    .navbar-links li a {
+        padding: .5rem 1rem;
+        color: white;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+}
+
+
+/* Search Movie section */
+
+
+
+#movieSearcher {
+
+    margin-top: 4rem;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 100%;
     
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1em;
-    width: 50rem;
+
 }
 
 #showSelection {
     
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1em;
-    width: 50rem;
-    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid red;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .titlePicture {
     text-align: center;
+    width: 40rem;
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    border: 1px solid green;
+    background: rgba(248, 249, 250, 0.178);
+    border-radius: 0.5rem;
+    
+    
 }
 
 .titlePicture img{
-    width: 100%;
+    width: 25%;
+    border-radius: 0.5rem;
 }
 
 .title {
-    height: 5rem;
+    height: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+    border: red 1px solid;
+    margin-left: 3rem;
+}
+
+
+/* Popular Movies */
+
+
+#moviesContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+#popularMovies {
+    display: flex;
+    flex-direction: row;
+    height: 20rem;
+    border: 1px solid red;
+
 }

@@ -1,85 +1,136 @@
+
+// Global Variables
+
 let url = 'http://api.themoviedb.org/3/movie/popular?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa'
+const pathImg = 'https://image.tmdb.org/t/p/w500';
+let input = document.getElementById('searchBar');
+let baseUrl = 'http://api.themoviedb.org/3';
+let movieOrTv = 'search';
+let endPoint = 'multi';
+let apiKey = '?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa';
+let page = '&page=';
 
-// 500 pages in total
+// &query=$
 
-for(let i = 1; i<=2; i++) {
-    let page = '&page=';
-    let promise = axios.get(url+page+i);
 
-    // Promesa de un array de pelis
-    let pelisArrayPromise = promise.then((response) => response.data.results);
-    resultsPromise = promise.then(response => response.results);
+const popular = async () => {
+    // Local Variables
+    let movieOrTv = 'movie';
+    let endPoint = 'popular';
+
+    // URL Building
+    let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}`; 
+    let movieCollection = await call(url);
+    //Render
+    renderPopular(movieCollection);
+};
+
+
+
+// Render Popular Movies
+
+const renderPopular = (pelisCollection) => { 
+    const divPelisDomElement = document.getElementById('popularMovies');
     
-    // Renderizar pelis
-
-    const pintaLasPelis = (pelisCollection) => { 
-        const divPelisDomElement = document.getElementById('pelis');
+    pelisCollection.map((pelicula) =>{
         
-        pelisCollection.map((pelicula) =>{
-            const pathImg = 'https://image.tmdb.org/t/p/w500';
-            const newPeliDomElement = document.createElement('div');
-            const titleMovie = document.createElement('div')
-            const moviePic = document.createElement('img')
-            
-            divPelisDomElement.appendChild(newPeliDomElement)
-            newPeliDomElement.appendChild(titleMovie)
-            newPeliDomElement.appendChild(moviePic)
-            
-            newPeliDomElement.setAttribute('class', 'titlePicture')
-            titleMovie.setAttribute('class', 'title')
-            titleMovie.innerHTML = pelicula.title;
-            moviePic.setAttribute('src', pathImg+pelicula.poster_path);
-    
-        });
-    }
-    
-    //Esta funcion recibe un array de peliculas y las pinta
-    pelisArrayPromise.then(pintaLasPelis);
+        const newPeliDomElement = document.createElement('div');
+        const titleMovie = document.createElement('div')
+        const moviePic = document.createElement('img')
+        
+        divPelisDomElement.appendChild(newPeliDomElement)
+        newPeliDomElement.appendChild(titleMovie)
+        newPeliDomElement.appendChild(moviePic)
+        
+        newPeliDomElement.setAttribute('class', 'titlePicture')
+        titleMovie.setAttribute('class', 'title')
+        titleMovie.innerHTML = pelicula.title;
+        moviePic.setAttribute('src', pathImg+pelicula.poster_path);
+
+    });
 }
 
+//Esta funcion recibe un array de peliculas y las pinta
+pelisArrayPromise.then(pintaLasPelis);
 
 
 
 // Movie searcher
 
-let urlSearcher = 'http://api.themoviedb.org/3/search/multi?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa&query=';
+const searcher = async () => {
+    if(event.keyCode === 13) {
 
-
-
-
-document.querySelector('#submit').addEventListener('click', () =>{
-    let input = document.querySelector('#searcher').value;
+        let query = input.value;
     
-    let searchApi = axios.get(urlSearcher+input);
-    let arraySearch = searchApi.then((response) => response.data.results)
-    
+        //Construccion de la URL 
+        let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}&query=${query}`; 
+        let movieCollection = await call(url);
+        changeScreen('moviesContainer','movieSearcher')
+        render(movieCollection);
+    }
+};
 
-    const searchRender = (pelisCollection) => { 
-        const divPelisDomElement = document.getElementById('showSelection');
-        
-        pelisCollection.map((pelicula) =>{
-            const pathImg = 'https://image.tmdb.org/t/p/w500';
-            const newPeliDomElement = document.createElement('div');
-            const titleMovie = document.createElement('div')
-            const moviePic = document.createElement('img')
-            
-            divPelisDomElement.appendChild(newPeliDomElement)
-            newPeliDomElement.appendChild(titleMovie)
-            newPeliDomElement.appendChild(moviePic)
-            
-            newPeliDomElement.setAttribute('class', 'titlePicture')
-            titleMovie.setAttribute('class', 'title')
-            titleMovie.innerHTML = pelicula.title;
-            moviePic.setAttribute('src', pathImg+pelicula.poster_path);
+
+// Calling the url created in the searcher
+
+const call = async (url) => {
+    let res = await axios.get(url);
     
-        });
+    if(!res.data.results){
+        error = new Error("La url era incorrecta");
+        return error;
     }
     
-    //Esta funcion recibe un array de peliculas y las pinta
-    arraySearch.then(searchRender);
-
-});
+    return res.data.results;
+};
 
 
+// Rendering the search
 
+const render = async (movieCollection) => {
+
+    movieCollection.map((arrayPosition) =>{
+
+        const divPelisDomElement = document.getElementById('showSelection');
+        const newPeliDomElement = document.createElement('div');
+        const titleMovie = document.createElement('div')
+        const moviePic = document.createElement('img')
+        
+        divPelisDomElement.appendChild(newPeliDomElement)
+        newPeliDomElement.appendChild(moviePic)
+        newPeliDomElement.appendChild(titleMovie)
+        
+        newPeliDomElement.setAttribute('class', 'titlePicture')
+        titleMovie.setAttribute('class', 'title')
+        titleMovie.innerHTML = arrayPosition.title;
+        moviePic.setAttribute('src', pathImg+arrayPosition.poster_path);
+        
+    });
+
+    return;
+};
+
+// Change Screen
+
+let changeScreen = (pastPhase,newPhase) => {
+    
+    currentScreen = document.getElementById(pastPhase);
+    futureScreen = document.getElementById(newPhase);
+    
+    currentScreen.style.display = "none";
+    futureScreen.style.display = "flex";
+
+};
+
+
+
+
+
+
+
+
+
+
+
+popular()
 

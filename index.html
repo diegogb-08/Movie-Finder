@@ -8,15 +8,39 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!--Navbar Section-->
 
-    <br>
-    <br>
+  <nav class="navbar">
+    <div class="brand-title"><img id="logo" src="img/fakeflixLogo.png" alt="logo"></div>
+    <a href="#" class="toggle-button">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </a>
+    <div class="navbar-links">
+        <ul>
+            <li><input type="text" id="searchBar" placeholder="Search... ENTER" onkeypress="searcher()"></li>
+            <li><a href="#main">Home</a></li>
+            <li><a href="#films">Films</a></li>
+            <li><a href="#series">Series</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>    
+    
+    <div id="moviesContainer">
+        <div id="popularMovies"></div>
+    </div>
 
-    <input type="text" id="searcher" placeholder="inster coin"> <br>
-    <button id="submit">Submit</button> <br>
-    <div id="movieSearcher">
+
+ 
+    <div id="movieSearcher" style="display:none">
         <div id="showSelection"></div>
     </div>
+
+
+
+
 
     <div id="pelis"></div> 
 
@@ -24,5 +48,6 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
 </body>
 </html>
