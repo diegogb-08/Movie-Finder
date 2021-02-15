@@ -1,7 +1,8 @@
 
 // Global Variables
 
-let url = 'http://api.themoviedb.org/3/movie/popular?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa'
+// let url = 'http://api.themoviedb.org/3/movie/popular?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa'
+
 const pathImg = 'https://image.tmdb.org/t/p/w500';
 let input = document.getElementById('searchBar');
 let baseUrl = 'http://api.themoviedb.org/3';
@@ -9,7 +10,7 @@ let movieOrTv = 'search';
 let endPoint = 'multi';
 let apiKey = '?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa';
 let page = '&page=';
-
+let checkBox = document.getElementById('searchById');
 // &query=$
 
 
@@ -21,6 +22,7 @@ const popular = async () => {
     // URL Building
     let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}`; 
     let movieCollection = await call(url);
+    console.log(url)
     //Render
     renderPopular(movieCollection);
 };
@@ -39,34 +41,39 @@ const renderPopular = (pelisCollection) => {
         const moviePic = document.createElement('img')
         
         divPelisDomElement.appendChild(newPeliDomElement)
-        newPeliDomElement.appendChild(titleMovie)
         newPeliDomElement.appendChild(moviePic)
+        newPeliDomElement.appendChild(titleMovie)
         
-        newPeliDomElement.setAttribute('class', 'titlePicture')
-        titleMovie.setAttribute('class', 'title')
+        newPeliDomElement.setAttribute('class', 'movieCollection')
+        titleMovie.setAttribute('class', 'titleCollection')
         titleMovie.innerHTML = pelicula.title;
         moviePic.setAttribute('src', pathImg+pelicula.poster_path);
 
     });
 }
 
-//Esta funcion recibe un array de peliculas y las pinta
-pelisArrayPromise.then(pintaLasPelis);
-
-
 
 // Movie searcher
 
 const searcher = async () => {
     if(event.keyCode === 13) {
-
         let query = input.value;
-    
-        //Construccion de la URL 
-        let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}&query=${query}`; 
-        let movieCollection = await call(url);
-        changeScreen('moviesContainer','movieSearcher')
-        render(movieCollection);
+
+        if(checkBox.checked == true) {
+            let movieOrTv = 'movie';
+            let url = `${baseUrl}/${movieOrTv}/${query}/${apiKey}`
+            let movieCollection = await call(url);
+            changeScreen('moviesContainer','movieSearcher')
+            render(movieCollection);
+
+        }else {
+            //Construccion de la URL 
+            let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}&query=${query}`; 
+            let movieCollection = await call(url);
+            changeScreen('moviesContainer','movieSearcher')
+            render(movieCollection);
+
+        }
     }
 };
 
@@ -127,10 +134,9 @@ let changeScreen = (pastPhase,newPhase) => {
 
 
 
-
-
-
-
-
 popular()
+
+
+
+
 

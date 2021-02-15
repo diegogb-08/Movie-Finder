@@ -47,6 +47,11 @@ body {
     margin-right: 2rem;
 }
 
+#searchById{
+    margin-top: 1.5rem;
+    margin-right: 2rem;
+}
+
 .navbar-links ul {
     margin: 0.5rem 0 0.5rem 0;
     padding: 0;
@@ -60,14 +65,14 @@ body {
 
 .navbar-links li a {
     text-decoration: none;
-    color: red;
+    color: white;
     padding: 1rem;
     display: block;
     font-weight: bold;
 }
 
 .navbar-links li a:hover {
-    color: white;
+    color: red;
 }
 
 .toggle-button {
@@ -196,12 +201,37 @@ body {
     display: flex;
     flex-direction: column;
     margin-top: 5rem;
+    margin-left: 2rem;
 }
 
 #popularMovies {
     display: flex;
     flex-direction: row;
     height: 20rem;
-    border: 1px solid red;
+}
 
+
+#moviesContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.movieCollection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20rem;
+    flex-direction: column;
+    
+}
+
+.movieCollection img {
+    height: 90%;
+    margin-right: 1rem;
+}
+
+.titleCollection {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
