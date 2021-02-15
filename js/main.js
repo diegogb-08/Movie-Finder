@@ -14,15 +14,13 @@ let checkBox = document.getElementById('searchById');
 // &query=$
 
 
-const popular = async () => {
+const renderCollection = async (endPoint) => {
     // Local Variables
     let movieOrTv = 'movie';
-    let endPoint = 'popular';
 
     // URL Building
     let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}`; 
     let movieCollection = await call(url);
-    console.log(url)
     //Render
     renderPopular(movieCollection);
 };
@@ -62,9 +60,9 @@ const searcher = async () => {
         if(checkBox.checked == true) {
             let movieOrTv = 'movie';
             let url = `${baseUrl}/${movieOrTv}/${query}/${apiKey}`
-            let movieCollection = await call(url);
+            let movieId = await call(url);
             changeScreen('moviesContainer','movieSearcher')
-            render(movieCollection);
+            renderMovieId(movieId);
 
         }else {
             //Construccion de la URL 
@@ -83,12 +81,29 @@ const searcher = async () => {
 const call = async (url) => {
     let res = await axios.get(url);
     
-    if(!res.data.results){
-        error = new Error("La url era incorrecta");
-        return error;
+    switch(res) {
+        case 1:
+            !res.data.results
+            return error = new Error("La url era incorrecta");
+        break;
+
+        
+        case 2:
+            res != Array.isArray();
+            return res
+        break;
+            
+        default:
+            return res.data.results;
     }
+
+
+    // if(!res.data.results){
+    //     error = new Error("La url era incorrecta");
+    //     return error;
+    // }
     
-    return res.data.results;
+    // return res.data.results;
 };
 
 
@@ -99,20 +114,35 @@ const render = async (movieCollection) => {
     movieCollection.map((arrayPosition) =>{
 
         const divPelisDomElement = document.getElementById('showSelection');
-        const newPeliDomElement = document.createElement('div');
-        const titleMovie = document.createElement('div')
-        const moviePic = document.createElement('img')
         
-        divPelisDomElement.appendChild(newPeliDomElement)
-        newPeliDomElement.appendChild(moviePic)
-        newPeliDomElement.appendChild(titleMovie)
-        
-        newPeliDomElement.setAttribute('class', 'titlePicture')
-        titleMovie.setAttribute('class', 'title')
-        titleMovie.innerHTML = arrayPosition.title;
-        moviePic.setAttribute('src', pathImg+arrayPosition.poster_path);
+        divPelisDomElement.innerHTML += `<div class='titlePicture'><img src='${pathImg}${arrayPosition.poster_path}'></img>
+        <div class='description'><div class='title'><h3>${arrayPosition.original_title}</h3>
+        </div><div class='rate'><p>Rate: ${arrayPosition.vote_average}/10</p>
+        </div><div class='overview'><p>${arrayPosition.overview}</p></div></div></div>`
         
     });
+
+    return;
+};
+
+// Rendering the search
+
+const renderMovieId = async () => {
+
+    const divPelisDomElement = document.getElementById('showSelection');
+    const newPeliDomElement = document.createElement('div');
+    const titleMovie = document.createElement('div')
+    const moviePic = document.createElement('img')
+    
+    divPelisDomElement.appendChild(newPeliDomElement)
+    newPeliDomElement.appendChild(moviePic)
+    newPeliDomElement.appendChild(titleMovie)
+    
+    newPeliDomElement.setAttribute('class', 'titlePicture')
+    titleMovie.setAttribute('class', 'title')
+    titleMovie.innerHTML = arrayPosition.title;
+    moviePic.setAttribute('src', pathImg+arrayPosition.poster_path);
+        
 
     return;
 };
@@ -134,7 +164,9 @@ let changeScreen = (pastPhase,newPhase) => {
 
 
 
-popular()
+renderCollection('popular');
+renderCollection('top_rated');
+
 
 
 
