@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -19,7 +20,7 @@
     </a>
     <div class="navbar-links">
         <ul>
-            <li>Search by ID <input type="checkbox" id="searchById"></li>
+            <li><label>Search by ID </label><input type="checkbox" id="searchById"></li>
             <li><input type="text" id="searchBar" placeholder="Search...    ENTER" onkeypress="searcher()"></li>
             <li><a href="#main">Home</a></li>
             <li><a href="#films">Films</a></li>
@@ -28,10 +29,46 @@
         </ul>
     </div>
 </nav>    
-    
-    <div id="moviesContainer">
-        <div id="popularMovies"></div>
+    <div class="mainContainer" id="mainContainer"> 
+        <div id="moviesContainer">
+            <div class="titleSection">
+                <h3>Popular Movies</h3>
+                <div class="indicators"></div>
+            </div>
+            
+                <button role="button" id="leftArrow" class="leftArrow"><i class="fas fa-angle-left"></i></button>
+                <div class="carouselContainer">
+                    <div class="carousel">
+                        <div class="movieRender" id="popularMovies"></div>
+                    </div>
+                </div>
+
+                <button role="button" id="rightArrow" class="rightArrow"><i class="fas fa-angle-right"></i></button>
+            
+        </div>
+        <div id="moviesContainer">
+            <div class="titleSection">
+                <h3>Top Rated Movies</h3>
+                <div class="indicators"></div>
+            </div>
+            <div class="movieRender" id="topRatedMovies"></div>
+        </div>
+        <div id="moviesContainer">
+            <div class="titleSection">
+                <h3>Upcoming Movies</h3>
+                <div class="indicators"></div>
+            </div>
+            <div class="movieRender" id="upcomingMovies"></div>
+        </div>
+        <div id="moviesContainer">
+            <div class="titleSection">
+                <h3>Now Playing</h3>
+                <div class="indicators"></div>
+            </div>
+            <div class="movieRender" id="nowPlayingMovies"></div>
+        </div>
     </div>
+    
 
 
  

@@ -22,7 +22,20 @@ const renderCollection = async (endPoint) => {
     let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}`; 
     let movieCollection = await call(url);
     //Render
-    renderPopular(movieCollection);
+
+    if(endPoint == "popular")
+       return renderPopular(movieCollection);
+
+    else if(endPoint == "top_rated") 
+       return renderTopRated(movieCollection);
+
+    else if(endPoint == "upcoming")
+        return renderUpcoming(movieCollection);
+
+    else if(endPoint == "now_playing")
+        return renderNowPlaying(movieCollection);
+
+    
 };
 
 
@@ -34,21 +47,91 @@ const renderPopular = (pelisCollection) => {
     
     pelisCollection.map((pelicula) =>{
         
-        const newPeliDomElement = document.createElement('div');
-        const titleMovie = document.createElement('div')
-        const moviePic = document.createElement('img')
-        
-        divPelisDomElement.appendChild(newPeliDomElement)
-        newPeliDomElement.appendChild(moviePic)
-        newPeliDomElement.appendChild(titleMovie)
-        
-        newPeliDomElement.setAttribute('class', 'movieCollection')
-        titleMovie.setAttribute('class', 'titleCollection')
-        titleMovie.innerHTML = pelicula.title;
-        moviePic.setAttribute('src', pathImg+pelicula.poster_path);
+        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        </img><div>${pelicula.title}</div></div></div>`
+    });
+}
+
+// Render Top rated Movies
+
+const renderTopRated = (pelisCollection) => { 
+    const divPelisDomElement = document.getElementById('topRatedMovies');
+    
+    pelisCollection.map((pelicula) =>{
+               
+        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        </img><div>${pelicula.title}</div></div></div>`
 
     });
 }
+
+// Render Upcoming Movies
+
+const renderUpcoming = (pelisCollection) => { 
+    const divPelisDomElement = document.getElementById('upcomingMovies');
+    
+    pelisCollection.map((pelicula) =>{
+               
+        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        </img><div>${pelicula.title}</div></div></div>`
+
+    });
+}
+
+
+// Render Now Playing Movies
+
+const renderNowPlaying = (pelisCollection) => { 
+    const divPelisDomElement = document.getElementById('nowPlayingMovies');
+    
+    pelisCollection.map((pelicula) =>{
+               
+        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        </img><div>${pelicula.title}</div></div></div>`
+
+    });
+}
+
+
+// Rendering the search
+
+const renderSearch = async (movieCollection) => {
+
+    movieCollection.map((arrayPosition) =>{
+
+        const divPelisDomElement = document.getElementById('showSelection');
+        
+        divPelisDomElement.innerHTML += `<div class='titlePicture'><img src='${pathImg}${arrayPosition.poster_path}'></img>
+        <div class='description'><div class='title'><h3>${arrayPosition.title}</h3>
+        </div><div class='rate'><p>Rate: ${arrayPosition.vote_average}/10</p>
+        </div><div class='overview'><p>${arrayPosition.overview}</p></div></div></div>`
+        
+    });
+
+    return;
+};
+
+// Rendering the search
+
+const renderMovieId = async (res) => {
+
+    const divPelisDomElement = document.getElementById('showSelection');
+        
+        divPelisDomElement.innerHTML += `<div class='titlePicture'>
+        <img src='${pathImg}${res.poster_path}'></img>
+        <div class='description'><div class='title'><h3>${res.title}</h3>
+        </div><div class='rate'><p>Rate: ${res.vote_average}/10</p>
+        </div><div class='overview'><p>${res.overview}</p></div></div></div>`
+        
+
+    return;
+};
+
+
 
 
 // Movie searcher
@@ -59,17 +142,19 @@ const searcher = async () => {
 
         if(checkBox.checked == true) {
             let movieOrTv = 'movie';
-            let url = `${baseUrl}/${movieOrTv}/${query}/${apiKey}`
-            let movieId = await call(url);
-            changeScreen('moviesContainer','movieSearcher')
-            renderMovieId(movieId);
+            let url = `${baseUrl}/${movieOrTv}/${query}${apiKey}`
+            let movieById = await call(url);
+            changeScreen('mainContainer','movieSearcher')
+            renderMovieId(movieById);
+            console.log('WE ARE IN THE CHECKBOX')
 
         }else {
             //Construccion de la URL 
             let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}&query=${query}`; 
             let movieCollection = await call(url);
-            changeScreen('moviesContainer','movieSearcher')
-            render(movieCollection);
+            changeScreen('mainContainer','movieSearcher')
+            renderSearch(movieCollection);
+            console.log('WE ARE IN THE SEARCH BY WORD')
 
         }
     }
@@ -81,71 +166,17 @@ const searcher = async () => {
 const call = async (url) => {
     let res = await axios.get(url);
     
-    switch(res) {
-        case 1:
-            !res.data.results
-            return error = new Error("La url era incorrecta");
-        break;
-
-        
-        case 2:
-            res != Array.isArray();
-            return res
-        break;
-            
-        default:
-            return res.data.results;
+    if(res.data.results)
+        return res.data.results;
+    if(res.data.title)
+        return res.data;
+    else{
+        return error = new Error("The URL was wrong!");
     }
 
-
-    // if(!res.data.results){
-    //     error = new Error("La url era incorrecta");
-    //     return error;
-    // }
-    
-    // return res.data.results;
 };
 
 
-// Rendering the search
-
-const render = async (movieCollection) => {
-
-    movieCollection.map((arrayPosition) =>{
-
-        const divPelisDomElement = document.getElementById('showSelection');
-        
-        divPelisDomElement.innerHTML += `<div class='titlePicture'><img src='${pathImg}${arrayPosition.poster_path}'></img>
-        <div class='description'><div class='title'><h3>${arrayPosition.original_title}</h3>
-        </div><div class='rate'><p>Rate: ${arrayPosition.vote_average}/10</p>
-        </div><div class='overview'><p>${arrayPosition.overview}</p></div></div></div>`
-        
-    });
-
-    return;
-};
-
-// Rendering the search
-
-const renderMovieId = async () => {
-
-    const divPelisDomElement = document.getElementById('showSelection');
-    const newPeliDomElement = document.createElement('div');
-    const titleMovie = document.createElement('div')
-    const moviePic = document.createElement('img')
-    
-    divPelisDomElement.appendChild(newPeliDomElement)
-    newPeliDomElement.appendChild(moviePic)
-    newPeliDomElement.appendChild(titleMovie)
-    
-    newPeliDomElement.setAttribute('class', 'titlePicture')
-    titleMovie.setAttribute('class', 'title')
-    titleMovie.innerHTML = arrayPosition.title;
-    moviePic.setAttribute('src', pathImg+arrayPosition.poster_path);
-        
-
-    return;
-};
 
 // Change Screen
 
@@ -166,6 +197,8 @@ let changeScreen = (pastPhase,newPhase) => {
 
 renderCollection('popular');
 renderCollection('top_rated');
+renderCollection('upcoming');
+renderCollection('now_playing');
 
 
 
