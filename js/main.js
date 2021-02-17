@@ -100,6 +100,7 @@ const renderNowPlaying = (pelisCollection) => {
 
 const renderSearch = async (movieCollection) => {
     const divPelisDomElement = document.getElementById('showSelection');
+    divPelisDomElement.innerHTML = " ";
 
     movieCollection.map((arrayMovies) =>{
         console.log(arrayMovies)
@@ -123,6 +124,7 @@ const renderSearch = async (movieCollection) => {
 const renderMovieId = async (res) => {
 
     const divPelisDomElement = document.getElementById('showSelection');
+    divPelisDomElement.innerHTML = " ";
    
         divPelisDomElement.innerHTML += `<div class='titlePicture'>
         <img class="film" src='${pathImg}${res.poster_path}'></img>
@@ -140,11 +142,9 @@ const renderMovieId = async (res) => {
 // Movie searcher
 
 const searcher = async () => {
+
     if(event.keyCode === 13) {
         let query = input.value;
-        const divPelisDomElement = document.getElementById('showSelection');
-        divPelisDomElement.innerHTML -= '';
-
         if(checkBox.checked == true) {
             let movieOrTv = 'movie';
             let url = `${baseUrl}/${movieOrTv}/${query}${apiKey}`
@@ -164,6 +164,27 @@ const searcher = async () => {
         }
     }
 };
+
+// Searc by Genre
+
+const searchByGender = async (value) => {
+    const divPelisDomElement = document.getElementById('showSelection');
+    
+    if(value != "0") {
+        let movieOrTv = 'discover';
+        let endPoint = 'movie';
+        console.log('WE ARE IN THE SEARCH BY GENRE')
+    
+        let url = `${baseUrl}/${movieOrTv}/${endPoint}${apiKey}&with_genres=${value}`
+        let movieCollection = await call(url);
+        changeScreen('mainContainer','movieSearcher')
+        renderSearch(movieCollection);
+    }else{
+        changeScreen('movieSearcher','mainContainer')
+    }
+
+}
+
 
 
 // Calling the url created in the searcher

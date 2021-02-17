@@ -53,9 +53,19 @@ body {
     margin-left: 2rem;
 }
 
-#searchById{
-    margin-top: 1.5rem;
-    margin-right: 5rem;
+.idSelector {
+    width: 6rem;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#selector{
+    height: 80%;
+    width: 10rem;
 }
 
 .navbar-links ul {

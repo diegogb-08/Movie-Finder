@@ -14,7 +14,9 @@ navbarLinks.addEventListener('click', () => {
 // Navbar Links
 
 const films = document.getElementById('films')
-
+    
 films.addEventListener('click', ()=> {
+    const divPelisDomElement = document.getElementById('showSelection');
+    divPelisDomElement.innerHTML -= ``
     changeScreen('movieSearcher','mainContainer')
 })
