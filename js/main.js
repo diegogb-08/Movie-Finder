@@ -1,20 +1,3 @@
-// Carousel
-
-const row = document.querySelector('.carousel');
-const leftArrow = document.getElementsByClassName('leftArrow');
-const rightArrow = document.getElementsByClassName('rightArrow');
-
-/* Event Listener for the right arrow */
-const rightArrowButton = () => {
-    row.scrollLeft += row.offsetWidth;
-};
-
-/* Event Listener for the left arrow */
-const leftArrowButton = () => {
-    row.scrollLeft -= row.offsetWidth;
-};
-
-
 
 
 // Global Variables

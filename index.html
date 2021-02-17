@@ -24,8 +24,6 @@
     </a>
     <div class="navbar-links">
         <ul>
-            <!-- <li><label>Search by ID </label><input type="checkbox" id="searchById"></li> -->
-            <!-- <li><input type="text" id="searchBar" placeholder="Search...    ENTER" onkeypress="searcher()"></li> -->
             <li><a href="#films">Films</a></li>
             <li><a href="#series">Series</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -40,13 +38,13 @@
             </div>
 
             <div class="filmContainer">
-                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <button role="button" id="leftArrow" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
                 <div class="carouselContainer">
                     <div class="carousel">
                         <div class="movieRender" id="popularMovies"></div>
                     </div>
                 </div>
-                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+                <button role="button" id="rightArrow" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
             </div>
         </div>
 
@@ -56,13 +54,13 @@
                 <div class="indicators"></div>
             </div>
             <div class="filmContainer">
-                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <button role="button" id="leftArrow2" class="leftArrow" onclick="leftArrowButton2()"><i class="fa fa-angle-left"></i></button>
                 <div class="carouselContainer">
-                    <div class="carousel">
+                    <div class="carousel carousel2">
                         <div class="movieRender" id="topRatedMovies"></div>
                     </div>
                 </div>
-                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+                <button role="button" id="rightArrow2" class="rightArrow" onclick="rightArrowButton2()"><i class="fa fa-angle-right"></i></button>
             </div>
         </div>
 
@@ -72,13 +70,13 @@
                 <div class="indicators"></div>
             </div>
             <div class="filmContainer">
-                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <button role="button" class="leftArrow" onclick="leftArrowButton3()"><i class="fa fa-angle-left"></i></button>
                 <div class="carouselContainer">
-                    <div class="carousel">
+                    <div class="carousel carousel3">
                         <div class="movieRender" id="upcomingMovies"></div>
                     </div>
                 </div>
-                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+                <button role="button" class="rightArrow" onclick="rightArrowButton3()"><i class="fa fa-angle-right"></i></button>
             </div>
         </div>
 
@@ -88,13 +86,13 @@
                 <div class="indicators"></div>
             </div>
             <div class="filmContainer">
-                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <button role="button" class="leftArrow" onclick="leftArrowButton4()"><i class="fa fa-angle-left"></i></button>
                 <div class="carouselContainer">
-                    <div class="carousel">
+                    <div class="carousel carousel4">
                         <div class="movieRender" id="nowPlayingMovies"></div>
                     </div>
                 </div>
-                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+                <button role="button" class="rightArrow" onclick="rightArrowButton4()"><i class="fa fa-angle-right"></i></button>
             </div>
         </div>
     </div>
@@ -117,6 +115,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/navbar.js"></script>
-    <!-- <script src="js/carousel.js"></script> -->
+    <script src="js/carousel.js"></script>
 </body>
 </html>
