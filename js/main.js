@@ -2,7 +2,6 @@
 
 // Global Variables
 
-// let url = 'http://api.themoviedb.org/3/movie/popular?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa'
 
 const pathImg = 'https://image.tmdb.org/t/p/w500';
 let input = document.getElementById('searchBar');
@@ -143,6 +142,8 @@ const renderMovieId = async (res) => {
 const searcher = async () => {
     if(event.keyCode === 13) {
         let query = input.value;
+        const divPelisDomElement = document.getElementById('showSelection');
+        divPelisDomElement.innerHTML -= '';
 
         if(checkBox.checked == true) {
             let movieOrTv = 'movie';
@@ -161,7 +162,7 @@ const searcher = async () => {
             console.log('WE ARE IN THE SEARCH BY WORD')
 
         }
-    } 
+    }
 };
 
 
