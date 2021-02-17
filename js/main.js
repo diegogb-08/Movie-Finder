@@ -6,7 +6,7 @@
 
 const pathImg = 'https://image.tmdb.org/t/p/w500';
 let input = document.getElementById('searchBar');
-let baseUrl = 'http://api.themoviedb.org/3';
+let baseUrl = 'https://api.themoviedb.org/3';
 let movieOrTv = 'search';
 let endPoint = 'multi';
 let apiKey = '?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa';
