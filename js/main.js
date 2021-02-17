@@ -18,7 +18,7 @@ const renderCollection = async (endPoint) => {
     let movieOrTv = 'movie';
 
     // URL Building
-    let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}`; 
+    let url = `${baseUrl}/${movieOrTv}/${endPoint}${apiKey}`; 
     let movieCollection = await call(url);
     //Render
 
