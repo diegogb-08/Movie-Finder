@@ -155,7 +155,7 @@ const searcher = async () => {
 
         }else {
             //Construccion de la URL 
-            let url = `${baseUrl}/${movieOrTv}/${endPoint}/${apiKey}&query=${query}`; 
+            let url = `${baseUrl}/${movieOrTv}/${endPoint}${apiKey}&query=${query}`; 
             let movieCollection = await call(url);
             changeScreen('mainContainer','movieSearcher')
             renderSearch(movieCollection);
