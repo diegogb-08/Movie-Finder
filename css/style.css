@@ -220,16 +220,21 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 
 #moviesContainer {
     display: flex;
     flex-direction: column;
     width: 90%;
-    margin-left: 2rem;
+    margin-left: 3rem;
 }
 
+.spaceContainer {
+    margin-top: 4rem;
+    display: flex;
+    height: 1rem;
+}
 
 .movieRender {
     display: flex;

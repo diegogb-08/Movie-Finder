@@ -6,13 +6,12 @@
 
 const pathImg = 'https://image.tmdb.org/t/p/w500';
 let input = document.getElementById('searchBar');
-let baseUrl = 'https://api.themoviedb.org/3';
+const baseUrl = 'https://api.themoviedb.org/3';
 let movieOrTv = 'search';
-let endPoint = 'multi';
+let endPoint = 'movie';
 let apiKey = '?api_key=c0b6dea31a9d647a6b7d1eafa59bacaa';
 let page = '&page=';
 let checkBox = document.getElementById('searchById');
-// &query=$
 
 
 const renderCollection = async (endPoint) => {
@@ -49,7 +48,7 @@ const renderPopular = (pelisCollection) => {
     pelisCollection.map((pelicula) =>{
         
         divPelisDomElement.innerHTML += `<div class='movieCollection moviesPopular'>
-        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        <div class='titleCollection'><img class="film" src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
     });
 }
@@ -62,7 +61,7 @@ const renderTopRated = (pelisCollection) => {
     pelisCollection.map((pelicula) =>{
                
         divPelisDomElement.innerHTML += `<div class='movieCollection moviesTopRated'>
-        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        <div class='titleCollection'><img class="film" src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
 
     });
@@ -76,7 +75,7 @@ const renderUpcoming = (pelisCollection) => {
     pelisCollection.map((pelicula) =>{
                
         divPelisDomElement.innerHTML += `<div class='movieCollection moviesUpcoming'>
-        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        <div class='titleCollection'><img class="film" src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
 
     });
@@ -91,7 +90,7 @@ const renderNowPlaying = (pelisCollection) => {
     pelisCollection.map((pelicula) =>{
                
         divPelisDomElement.innerHTML += `<div class='movieCollection moviesNowPlaying'>
-        <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
+        <div class='titleCollection'><img class="film" src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
 
     });
@@ -103,15 +102,15 @@ const renderNowPlaying = (pelisCollection) => {
 const renderSearch = async (movieCollection) => {
     const divPelisDomElement = document.getElementById('showSelection');
 
-    movieCollection.map((arrayPosition) =>{
+    movieCollection.map((arrayMovies) =>{
+        console.log(arrayMovies)
 
-        if(arrayPosition.title || arrayPosition.poster_path != undefined) {
+        if(arrayMovies.title || arrayMovies.poster_path != undefined || null) {
             
-            
-            divPelisDomElement.innerHTML += `<div class='titlePicture'><img src='${pathImg}${arrayPosition.poster_path}'></img>
-            <div class='description'><div class='title'><h3>${arrayPosition.title}</h3>
-            </div><div class='rate'><p>Rate: ${arrayPosition.vote_average}/10</p>
-            </div><div class='overview'><p>${arrayPosition.overview}</p></div></div></div>`
+            divPelisDomElement.innerHTML += `<div class='titlePicture'><img class="film" src='${pathImg}${arrayMovies.poster_path}'></img>
+            <div class='description'><div class='title'><h3>${arrayMovies.title}</h3>
+            </div><div class='rate'><p>Rate: ${arrayMovies.vote_average}/10</p>
+            </div><div class='overview'><p>${arrayMovies.overview}</p></div></div></div>`
         }
 
         
@@ -125,9 +124,9 @@ const renderSearch = async (movieCollection) => {
 const renderMovieId = async (res) => {
 
     const divPelisDomElement = document.getElementById('showSelection');
-        
+   
         divPelisDomElement.innerHTML += `<div class='titlePicture'>
-        <img src='${pathImg}${res.poster_path}'></img>
+        <img class="film" src='${pathImg}${res.poster_path}'></img>
         <div class='description'><div class='title'><h3>${res.title}</h3>
         </div><div class='rate'><p>Rate: ${res.vote_average}/10</p>
         </div><div class='overview'><p>${res.overview}</p></div></div></div>`
@@ -137,7 +136,7 @@ const renderMovieId = async (res) => {
 };
 
 
-
+// if(event.keyCode !== 8){}
 
 // Movie searcher
 
@@ -162,7 +161,7 @@ const searcher = async () => {
             console.log('WE ARE IN THE SEARCH BY WORD')
 
         }
-    }
+    } 
 };
 
 

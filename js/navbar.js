@@ -11,3 +11,10 @@ navbarLinks.addEventListener('click', () => {
     navbarLinks.classList.toggle('active');
 });
 
+// Navbar Links
+
+const films = document.getElementById('films')
+
+films.addEventListener('click', ()=> {
+    changeScreen('movieSearcher','mainContainer')
+})
