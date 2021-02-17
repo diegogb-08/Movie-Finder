@@ -1,3 +1,21 @@
+// Carousel
+
+const row = document.querySelector('.carousel');
+const leftArrow = document.getElementsByClassName('leftArrow');
+const rightArrow = document.getElementsByClassName('rightArrow');
+
+/* Event Listener for the right arrow */
+const rightArrowButton = () => {
+    row.scrollLeft += row.offsetWidth;
+};
+
+/* Event Listener for the left arrow */
+const leftArrowButton = () => {
+    row.scrollLeft -= row.offsetWidth;
+};
+
+
+
 
 // Global Variables
 
@@ -47,7 +65,7 @@ const renderPopular = (pelisCollection) => {
     
     pelisCollection.map((pelicula) =>{
         
-        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        divPelisDomElement.innerHTML += `<div class='movieCollection moviesPopular'>
         <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
     });
@@ -60,7 +78,7 @@ const renderTopRated = (pelisCollection) => {
     
     pelisCollection.map((pelicula) =>{
                
-        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        divPelisDomElement.innerHTML += `<div class='movieCollection moviesTopRated'>
         <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
 
@@ -74,7 +92,7 @@ const renderUpcoming = (pelisCollection) => {
     
     pelisCollection.map((pelicula) =>{
                
-        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        divPelisDomElement.innerHTML += `<div class='movieCollection moviesUpcoming'>
         <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
 
@@ -89,7 +107,7 @@ const renderNowPlaying = (pelisCollection) => {
     
     pelisCollection.map((pelicula) =>{
                
-        divPelisDomElement.innerHTML += `<div class='movieCollection'>
+        divPelisDomElement.innerHTML += `<div class='movieCollection moviesNowPlaying'>
         <div class='titleCollection'><img src='${pathImg}${pelicula.poster_path}'>
         </img><div>${pelicula.title}</div></div></div>`
 
@@ -100,15 +118,19 @@ const renderNowPlaying = (pelisCollection) => {
 // Rendering the search
 
 const renderSearch = async (movieCollection) => {
+    const divPelisDomElement = document.getElementById('showSelection');
 
     movieCollection.map((arrayPosition) =>{
 
-        const divPelisDomElement = document.getElementById('showSelection');
-        
-        divPelisDomElement.innerHTML += `<div class='titlePicture'><img src='${pathImg}${arrayPosition.poster_path}'></img>
-        <div class='description'><div class='title'><h3>${arrayPosition.title}</h3>
-        </div><div class='rate'><p>Rate: ${arrayPosition.vote_average}/10</p>
-        </div><div class='overview'><p>${arrayPosition.overview}</p></div></div></div>`
+        if(arrayPosition.title || arrayPosition.poster_path != undefined) {
+            
+            
+            divPelisDomElement.innerHTML += `<div class='titlePicture'><img src='${pathImg}${arrayPosition.poster_path}'></img>
+            <div class='description'><div class='title'><h3>${arrayPosition.title}</h3>
+            </div><div class='rate'><p>Rate: ${arrayPosition.vote_average}/10</p>
+            </div><div class='overview'><p>${arrayPosition.overview}</p></div></div></div>`
+        }
+
         
     });
 

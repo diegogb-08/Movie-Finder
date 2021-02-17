@@ -26,12 +26,19 @@ body {
     color: red;
     font-family: Arial, Helvetica, sans-serif;
     box-shadow: 5px 5px 26px -16px rgba(0,0,0,0.75);
+    z-index: 1000;
+    
 }
 
 .brand-title {
-    font-size: 1.5rem;
-    margin: 0.5rem;
+    font-size: 1rem;
+    margin:  0.5rem 0.5rem 0.5rem 4rem;
     height: 3rem;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 #logo {
@@ -43,17 +50,16 @@ body {
     width: 15rem;
     height: 2rem;
     padding-left: 1rem;
-    margin-top: 0.5rem;
-    margin-right: 2rem;
+    margin-left: 2rem;
 }
 
 #searchById{
     margin-top: 1.5rem;
-    margin-right: 2rem;
+    margin-right: 5rem;
 }
 
 .navbar-links ul {
-    margin: 0.5rem 0 0.5rem 0;
+    margin: 0.5rem 2rem 0.5rem;
     padding: 0;
     display: flex;
 }
@@ -214,16 +220,16 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: 4rem;
+    margin-top: 5rem;
 }
 
 #moviesContainer {
     display: flex;
     flex-direction: column;
     width: 90%;
-    margin-top: 1rem;
     margin-left: 2rem;
 }
+
 
 .movieRender {
     display: flex;
@@ -231,13 +237,24 @@ body {
     height: 18rem;
 }
 
+.movieRender img {
+    transition: .3s ease all;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.3);
+    vertical-align: top;
+}
+
+.movieRender img.hover {
+    transform: scale(1.2);
+    transform-origin: center;
+}
+
+
 
 .movieCollection {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 18rem;
-    width: 20rem;
     flex-direction: column;
     
 }
@@ -246,14 +263,11 @@ body {
     height: 90%;
 }
 
-.movieCollection img:hover {
-    height: 95%;
-}
 
 .titleCollection {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    height: 100%;
+    height: 17rem;
     font-size: 12px;
     display: flex;
     flex-direction: column;
@@ -268,4 +282,118 @@ body {
 .titleSection {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
 }
+
+
+/* indicators */
+
+.indicators button {
+    background-color: #fff;
+    height: 3px;
+    width: 10px;
+    cursor: pointer;
+    border: none;
+    margin-right: 2px;
+}
+
+.indicators button:hover, 
+.indicators button.activo {
+    background-color: red;
+}
+
+/* carousel */
+
+
+.leftArrow,
+.rightArrow {
+    position: absolute;
+    border: none;
+    background-color: rgba(0,0,0,0.3);
+    font-size: 40px;
+    height: 50%;
+    top: calc(50% - 25%);
+    line-height: 40px;
+    width: 50px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 500;
+    transition: .2s ease all;
+}
+
+.leftArrow:hover,
+.rightArrow:hover {
+    background-color: rgba(0,0,0,0.9);;
+}
+
+.leftArrow {
+    left: 0;
+}
+
+.rightArrow {
+    right: 0;
+}
+
+.filmContainer {
+    display: flex;
+    align-items: center;
+    position: relative;
+    
+}
+
+.carouselContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+
+
+/* ----- Media Queries ----- */
+
+/* @media screen and (max-width: 800px) {
+
+    .carouselContainer {
+        overflow: visible;
+    }
+    
+    .carousel {
+        display: grid;
+    }
+    .movieRender {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px
+    }
+
+    .movieCollection {
+        display: grid;
+        height: 10rem;
+    }
+
+    #moviesContainer {
+        margin-bottom: 50rem;
+    }
+
+    .indicators,
+    .leftArrow,
+    .rightArrow {
+        display: none;
+    }
+
+} */

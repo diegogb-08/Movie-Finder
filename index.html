@@ -12,7 +12,11 @@
   <!--Navbar Section-->
 
   <nav class="navbar">
-    <div class="brand-title"><img id="logo" src="img/fakeflixLogo.png" alt="logo"></div>
+    <div class="brand-title">
+        <img id="logo" src="img/fakeflixLogo.png" alt="logo">
+        <input type="text" id="searchBar" placeholder="Search...    Press ENTER" onkeypress="searcher()">
+        <label>Search by ID <input type="checkbox" id="searchById"></label>
+    </div>
     <a href="#" class="toggle-button">
         <span class="bar"></span>
         <span class="bar"></span>
@@ -20,9 +24,8 @@
     </a>
     <div class="navbar-links">
         <ul>
-            <li><label>Search by ID </label><input type="checkbox" id="searchById"></li>
-            <li><input type="text" id="searchBar" placeholder="Search...    ENTER" onkeypress="searcher()"></li>
-            <li><a href="#main">Home</a></li>
+            <!-- <li><label>Search by ID </label><input type="checkbox" id="searchById"></li> -->
+            <!-- <li><input type="text" id="searchBar" placeholder="Search...    ENTER" onkeypress="searcher()"></li> -->
             <li><a href="#films">Films</a></li>
             <li><a href="#series">Series</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -35,37 +38,64 @@
                 <h3>Popular Movies</h3>
                 <div class="indicators"></div>
             </div>
-            
-                <button role="button" id="leftArrow" class="leftArrow"><i class="fas fa-angle-left"></i></button>
+
+            <div class="filmContainer">
+                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
                 <div class="carouselContainer">
                     <div class="carousel">
                         <div class="movieRender" id="popularMovies"></div>
                     </div>
                 </div>
-
-                <button role="button" id="rightArrow" class="rightArrow"><i class="fas fa-angle-right"></i></button>
-            
+                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+            </div>
         </div>
+
         <div id="moviesContainer">
             <div class="titleSection">
                 <h3>Top Rated Movies</h3>
                 <div class="indicators"></div>
             </div>
-            <div class="movieRender" id="topRatedMovies"></div>
+            <div class="filmContainer">
+                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <div class="carouselContainer">
+                    <div class="carousel">
+                        <div class="movieRender" id="topRatedMovies"></div>
+                    </div>
+                </div>
+                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+            </div>
         </div>
+
         <div id="moviesContainer">
             <div class="titleSection">
                 <h3>Upcoming Movies</h3>
                 <div class="indicators"></div>
             </div>
-            <div class="movieRender" id="upcomingMovies"></div>
+            <div class="filmContainer">
+                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <div class="carouselContainer">
+                    <div class="carousel">
+                        <div class="movieRender" id="upcomingMovies"></div>
+                    </div>
+                </div>
+                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+            </div>
         </div>
+
         <div id="moviesContainer">
             <div class="titleSection">
                 <h3>Now Playing</h3>
                 <div class="indicators"></div>
             </div>
-            <div class="movieRender" id="nowPlayingMovies"></div>
+            <div class="filmContainer">
+                <button role="button" class="leftArrow" onclick="leftArrowButton()"><i class="fa fa-angle-left"></i></button>
+                <div class="carouselContainer">
+                    <div class="carousel">
+                        <div class="movieRender" id="nowPlayingMovies"></div>
+                    </div>
+                </div>
+                <button role="button" class="rightArrow" onclick="rightArrowButton()"><i class="fa fa-angle-right"></i></button>
+            </div>
         </div>
     </div>
     
@@ -87,5 +117,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/navbar.js"></script>
+    <!-- <script src="js/carousel.js"></script> -->
 </body>
 </html>
